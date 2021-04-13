@@ -30,7 +30,7 @@ const useCocktailsList = () => {
         setCocktailsList(drinksList);
     }
 
-    const loadNewCocktails = (amount = 8, query) => {
+    const loadNewCocktails = (amount = 16, query) => {
         if (!query) {
             for (let i = 1; i <= amount; i++) {
                 loadRandomDrink();
