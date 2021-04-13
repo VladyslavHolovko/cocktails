@@ -1,0 +1,63 @@
+.drink {
+  &__container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+
+    animation: 2s ease reveal;
+    background-color: white;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 6px;
+
+    user-select: none;
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    border-radius: 2px;
+    -webkit-filter: grayscale(50%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(50%);
+  }
+
+  &__hover-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+
+    transition: opacity ease 300ms;
+
+    &:hover {
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  &__hover-name {
+    text-align: center;
+    background-color: white;
+    padding: 0.5rem;
+    max-width: 70%;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

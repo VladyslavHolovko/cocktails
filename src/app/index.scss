@@ -1,0 +1,58 @@
+.cocktails {
+  font-family: 'Montserrat', sans-serif;
+
+  &__container {
+    position: relative;
+    padding: 1rem 10vw 3rem;
+    box-sizing: border-box;
+    min-height: 101vh;
+    background-color: #e1e1e1;
+  }
+
+  &__logo-container{
+    position: absolute;
+    padding: 2.75rem 0;
+    width: 10vw;
+    top: 0;
+    left: 0;
+    text-align: center;
+  }
+
+  &__logo {
+    transform: scale(2);
+    font-size: large;
+    color: #777777;
+  }
+
+  &__filters {
+    margin: 0 0 2.4rem;
+  }
+
+  &__list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+    grid-gap: 2.4rem 1rem;
+
+    & > div {
+      min-height: 200px;
+    }
+  }
+
+  &__loader {
+    position: absolute;
+    bottom: 0;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
