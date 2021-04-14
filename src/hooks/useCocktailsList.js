@@ -1,11 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const useCocktailsList = () => {
     const [cocktailsList, setCocktailsList] = useState([]);
-
-    useEffect(() => {
-        loadNewCocktails();
-    }, []);
 
     const loadRandomDrink = async () => {
         const newDrink = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
@@ -39,9 +35,13 @@ const useCocktailsList = () => {
     };
 
     const loadNewCocktails = (params = {}) => {
-        const { name, alcohol } = params;
+        const { name, alcohol, refresh } = params;
 
         if (!name && !alcohol) {
+            if (refresh) {
+                setCocktailsList([]);
+            }
+
             for (let i = 1; i <= 8; i++) {
                 loadRandomDrink();
             }
