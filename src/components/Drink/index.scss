@@ -5,7 +5,7 @@
     position: relative;
     cursor: pointer;
 
-    animation: 2s ease reveal;
+    animation: 2s ease reveal; /*animation is declared in app/index.scss*/
     background-color: white;
     padding: 1rem;
     box-sizing: border-box;
@@ -50,14 +50,5 @@
     background-color: white;
     padding: 0.5rem;
     max-width: 70%;
-  }
-}
-
-@keyframes reveal {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }

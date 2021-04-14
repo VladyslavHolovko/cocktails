@@ -43,6 +43,11 @@
     display: flex;
     justify-content: center;
   }
+
+  &__nothing {
+    animation: 2s ease reveal;
+    margin: 0;
+  }
 }
 
 @keyframes reveal {

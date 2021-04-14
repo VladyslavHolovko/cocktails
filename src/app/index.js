@@ -38,6 +38,9 @@ const CocktailsApp = () => {
                 />
             </div>
             <div className="cocktails__list">
+                {!cocktailsList.length && (
+                    <p className="cocktails__nothing">Nothing was found...</p>
+                )}
                 {cocktailsList.map(drink => (
                     <Drink
                         key={drink.idDrink}
