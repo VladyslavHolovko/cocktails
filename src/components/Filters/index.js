@@ -1,5 +1,6 @@
 import './index.scss';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import usePersistedState from "../../hooks/usePersistedState";
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,9 +10,18 @@ import ClearIcon from '@material-ui/icons/Clear';
 import FilterByAlcohol from "../FilterByAlcohol";
 
 const Filters = ({ onSearch, setIsLazyLoading, isFiltered }) => {
-    const [isFilterByName, setIsFilterByName] = useState(true);
-    const [inputValue, setInputValue] = useState('');
-    const [radioValue, setRadioValue] = useState('');
+    const [isFilterByName, setIsFilterByName] = usePersistedState('isFilterByName',true);
+    const [inputValue, setInputValue] = usePersistedState('inputValue', '');
+    const [radioValue, setRadioValue] = usePersistedState('radioValue', '');
+
+    useEffect(() => {
+        if (inputValue) {
+            searchByName();
+        }
+        if (radioValue) {
+            searchByAlcohol(radioValue);
+        }
+    }, []);
 
     const toggleActiveFilters = () => {
         setIsFilterByName(state => !state);

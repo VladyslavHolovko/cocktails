@@ -5,7 +5,7 @@ import Drink from "../components/Drink";
 import DrinkModal from "../components/DrinkModal";
 import Loader from "../components/Loader";
 import Filters from "../components/Filters";
-import useCocktailsList from "../hooks/cocktailsList";
+import useCocktailsList from "../hooks/useCocktailsList";
 import observe from "../utils/observe";
 
 const CocktailsApp = () => {
