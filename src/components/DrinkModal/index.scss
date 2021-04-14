@@ -63,6 +63,9 @@
   &__instruction-container {
     width: 100%;
     min-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
 
     &::before {
       display: block;
@@ -75,5 +78,6 @@
   &__instruction {
     padding-top: 1rem;
     font-style: italic;
+
   }
 }
