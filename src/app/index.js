@@ -23,7 +23,7 @@ const CocktailsApp = () => {
             <div className="cocktails__logo-container">
                 <LocalBarIcon
                     className="cocktails__logo"
-                    fontSize="large"
+                    fontSize="small"
                 />
             </div>
             <DrinkModal
