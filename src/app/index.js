@@ -9,13 +9,13 @@ import useCocktailsList from "../hooks/cocktailsList";
 import observe from "../utils/observe";
 
 const CocktailsApp = () => {
-    const [cocktailsList, loadNewCocktails] = useCocktailsList();
+    const [cocktailsList, setCocktailsList] = useCocktailsList();
     const [modalData, setModalData] = useState(false);
     const [isLazyLoading, setIsLazyLoading] = useState(true);
 
     const loader = useRef(null);
     useEffect(() => {
-        observe(loader.current, loadNewCocktails);
+        observe(loader.current, setCocktailsList);
     }, []);
 
     return (
@@ -32,7 +32,7 @@ const CocktailsApp = () => {
             />
             <div className="cocktails__filters">
                 <Filters
-                    onSearch={loadNewCocktails}
+                    onSearch={setCocktailsList}
                     setIsLazyLoading={setIsLazyLoading}
                     isFiltered={!isLazyLoading}
                 />
@@ -52,7 +52,7 @@ const CocktailsApp = () => {
             <div
                 className="cocktails__loader"
                 ref={loader}
-                style={{display: isLazyLoading ? 'block' : 'none'}}
+                style={{ display: isLazyLoading ? 'block' : 'none' }}
             >
                 <Loader/>
             </div>

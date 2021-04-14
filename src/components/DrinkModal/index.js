@@ -1,12 +1,22 @@
 import './index.scss';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from "@material-ui/core/Modal";
 import mapMeasuresToIngredients from "../../utils/mapMeasuresToIngredients";
+import fetchDrinkData from "../../utils/fetchDrinkData";
 
 const DrinkModal = ({ drink, onClose }) => {
-    const { strDrinkThumb, strDrink, strInstructions } = drink;
+    const [drinkData, setDrinkData] = useState({ ...drink });
 
-    const ingredients = mapMeasuresToIngredients(drink);
+    useEffect(() => {
+        if (!!drink && !drink.strInstructions) {
+            fetchDrinkData(drink.idDrink, setDrinkData);
+            return;
+        }
+        setDrinkData({ ...drink });
+    }, [drink]);
+
+    const { strDrinkThumb, strDrink, strInstructions } = drinkData;
+    const ingredients = mapMeasuresToIngredients(drinkData);
 
     return (
         <Modal

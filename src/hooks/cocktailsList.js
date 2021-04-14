@@ -4,7 +4,7 @@ const useCocktailsList = () => {
     const [cocktailsList, setCocktailsList] = useState([]);
 
     useEffect(() => {
-        loadNewCocktails(4);
+        loadNewCocktails();
     }, []);
 
     const loadRandomDrink = async () => {
@@ -22,23 +22,40 @@ const useCocktailsList = () => {
         });
     };
 
-    const loadDrinksByQuery = async (query) => {
+    const loadDrinksByNameQuery = async (query) => {
         const drinksList = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`)
             .then(response => response.json())
             .then(({ drinks }) => drinks || []);
 
         setCocktailsList(drinksList);
-    }
+    };
 
-    const loadNewCocktails = (amount = 16, query) => {
-        if (!query) {
-            for (let i = 1; i <= amount; i++) {
+    const loadDrinksByAlcohol = async (alcohol) => {
+        const drinksList = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${alcohol}`)
+            .then(response => response.json())
+            .then(({ drinks }) => drinks || []);
+
+        setCocktailsList(drinksList);
+    };
+
+    const loadNewCocktails = (params = {}) => {
+        const { name, alcohol } = params;
+
+        if (!name && !alcohol) {
+            for (let i = 1; i <= 8; i++) {
                 loadRandomDrink();
             }
             return;
         }
 
-        loadDrinksByQuery(query);
+        if (name) {
+            loadDrinksByNameQuery(name);
+            return;
+        }
+
+        if (alcohol) {
+            loadDrinksByAlcohol(alcohol);
+        }
     };
 
     return [cocktailsList, loadNewCocktails];
