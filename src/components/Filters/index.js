@@ -10,7 +10,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import FilterByAlcohol from "../FilterByAlcohol";
 
 const Filters = ({ onSearch, setIsLazyLoading, isFiltered }) => {
-    const [isFilterByName, setIsFilterByName] = usePersistedState('isFilterByName','');
+    const [isFilterByName, setIsFilterByName] = usePersistedState('isFilterByName', '');
     const [inputValue, setInputValue] = usePersistedState('inputValue', '');
     const [radioValue, setRadioValue] = usePersistedState('radioValue', '');
 
@@ -100,7 +100,7 @@ const Filters = ({ onSearch, setIsLazyLoading, isFiltered }) => {
                     />
                 }
             </div>
-            {(isFilterByName ? inputValue : radioValue ) && (
+            {(isFilterByName ? inputValue : radioValue) && (
                 <div className="filters__icon-button">
                     <IconButton
                         color="primary"
@@ -111,15 +111,17 @@ const Filters = ({ onSearch, setIsLazyLoading, isFiltered }) => {
                     </IconButton>
                 </div>
             )}
-            <div className="filters__icon-button">
-                <IconButton
-                    color="primary"
-                    edge="end"
-                    onClick={searchByName}
-                >
-                    <SearchIcon className="filters__search-icon"/>
-                </IconButton>
-            </div>
+            {isFilterByName && (
+                <div className="filters__icon-button">
+                    <IconButton
+                        color="primary"
+                        edge="end"
+                        onClick={searchByName}
+                    >
+                        <SearchIcon className="filters__search-icon"/>
+                    </IconButton>
+                </div>
+            )}
         </div>
     );
 };
