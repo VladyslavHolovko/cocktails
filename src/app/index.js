@@ -7,11 +7,19 @@ import Loader from "../components/Loader";
 import Filters from "../components/Filters";
 import useCocktailsList from "../hooks/useCocktailsList";
 import observe from "../utils/observe";
+import getInitialLoadQueryParams from "../utils/getInitialLoadQueryParams";
 
 const CocktailsApp = () => {
     const [cocktailsList, setCocktailsList] = useCocktailsList();
     const [modalData, setModalData] = useState(false);
     const [isLazyLoading, setIsLazyLoading] = useState(true);
+
+    useEffect(() => {
+        const isFilteredBy = getInitialLoadQueryParams(['name', 'alcohol']);
+
+        setIsLazyLoading(!isFilteredBy);
+        setCocktailsList(isFilteredBy);
+    },[]);
 
     const loader = useRef(null);
     useEffect(() => {
