@@ -9,10 +9,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import FilterByAlcohol from "../FilterByAlcohol";
 
-const Filters = ({ onSearch, setIsLazyLoading, isFiltered }) => {
+const Filters = ({ onSearch }) => {
     const [isFilterByName, setIsFilterByName] = usePersistedState('isFilterByName', '');
-    const [inputValue, setInputValue] = usePersistedState('name', '');
-    const [radioValue, setRadioValue] = usePersistedState('alcohol', '');
+    const [inputValue, setInputValue] = usePersistedState('filterInput', '');
+    const [radioValue, setRadioValue] = usePersistedState('filterRadio', '');
 
     const toggleActiveFilters = () => {
         setIsFilterByName(state => !state);
@@ -26,7 +26,6 @@ const Filters = ({ onSearch, setIsLazyLoading, isFiltered }) => {
         onSearch({ name: inputValue });
 
         setRadioValue('');
-        setIsLazyLoading(false);
     };
 
     const onInputKeyPress = (ev) => {
@@ -40,17 +39,13 @@ const Filters = ({ onSearch, setIsLazyLoading, isFiltered }) => {
         setInputValue('');
         setRadioValue('');
 
-        if (!isFiltered) return;
-
         onSearch({ refresh: true });
-        setIsLazyLoading(true);
     };
 
     const searchByAlcohol = (radioValue) => {
         onSearch({ alcohol: radioValue });
 
         setInputValue('');
-        setIsLazyLoading(false);
     };
 
     const handleRadioChange = (event) => {

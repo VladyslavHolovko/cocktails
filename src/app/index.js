@@ -7,19 +7,18 @@ import Loader from "../components/Loader";
 import Filters from "../components/Filters";
 import useCocktailsList from "../hooks/useCocktailsList";
 import observe from "../utils/observe";
-import getInitialLoadQueryParams from "../utils/getInitialLoadQueryParams";
+import usePersistedState from "../hooks/usePersistedState";
 
 const CocktailsApp = () => {
     const [cocktailsList, setCocktailsList] = useCocktailsList();
     const [modalData, setModalData] = useState(false);
     const [isLazyLoading, setIsLazyLoading] = useState(true);
+    const [filterParam, setFilterParam] = usePersistedState('filterParam', {refresh: true})
 
     useEffect(() => {
-        const isFilteredBy = getInitialLoadQueryParams(['name', 'alcohol']);
-
-        setIsLazyLoading(!isFilteredBy);
-        setCocktailsList(isFilteredBy);
-    },[]);
+        setIsLazyLoading(filterParam.refresh);
+        setCocktailsList(filterParam);
+    },[filterParam]);
 
     const loader = useRef(null);
     useEffect(() => {
@@ -40,7 +39,7 @@ const CocktailsApp = () => {
             />
             <div className="cocktails__filters">
                 <Filters
-                    onSearch={setCocktailsList}
+                    onSearch={setFilterParam}
                     setIsLazyLoading={setIsLazyLoading}
                     isFiltered={!isLazyLoading}
                 />
