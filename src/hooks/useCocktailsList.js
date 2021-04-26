@@ -22,6 +22,7 @@ const useCocktailsList = () => {
 
         if (refresh) {
             setCocktailsList([]);
+            return;
         }
 
         if (random) {

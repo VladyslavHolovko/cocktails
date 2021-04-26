@@ -50,7 +50,7 @@ const CocktailsApp = () => {
                 )}
                 {cocktailsList.map(drink => (
                     <Drink
-                        key={drink.idDrink}
+                        key={drink.id}
                         drink={drink}
                         onDrinkClick={() => setModalData(drink)}
                     />
