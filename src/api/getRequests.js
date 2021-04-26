@@ -1,7 +1,10 @@
+import normalizeDrink from "../utils/normalizeDrink";
+
 export const getRandomDrink = async () => {
     return await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
         .then(response => response.json())
-        .then(({ drinks }) => drinks[0]);
+        .then(({ drinks }) => drinks[0])
+        .then(normalizeDrink);
 };
 
 export const getFilteredDrinks = async (params) => {

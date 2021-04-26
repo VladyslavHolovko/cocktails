@@ -6,14 +6,14 @@ const Drink = ({ drink, onDrinkClick }) => {
 
     return (
         <div
-            key={idDrink}
+            key={id}
             className="drink__container"
             onClick={onDrinkClick}
         >
             <img src={strDrinkThumb} alt={strDrink} className="drink__img"/>
             <div className="drink__hover-container">
                 <div className="drink__hover-name">
-                    {strDrink}
+                    {name}
                 </div>
             </div>
         </div>

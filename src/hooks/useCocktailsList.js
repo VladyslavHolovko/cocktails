@@ -8,7 +8,7 @@ const useCocktailsList = () => {
         const newDrink = await getRandomDrink();
 
         setCocktailsList(state => {
-            if (state.some(drink => drink.idDrink === newDrink.idDrink)) {
+            if (state.some(drink => drink.id === newDrink.id)) {
                 addRandomDrink();
                 return [...state];
             }
