@@ -1,61 +1,37 @@
 import { useState } from 'react';
+import { getFilteredDrinks, getRandomDrink } from "../api/getRequests";
 
 const useCocktailsList = () => {
     const [cocktailsList, setCocktailsList] = useState([]);
 
-    const loadRandomDrink = async () => {
-        const newDrink = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-            .then(response => response.json())
-            .then(({ drinks }) => drinks[0]);
+    const addRandomDrink = async () => {
+        const newDrink = await getRandomDrink();
 
         setCocktailsList(state => {
             if (state.some(drink => drink.idDrink === newDrink.idDrink)) {
-                loadRandomDrink();
+                addRandomDrink();
                 return [...state];
             }
 
             return [...state, newDrink];
         });
-    };
+    }
 
-    const loadDrinksByNameQuery = async (query) => {
-        const drinksList = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`)
-            .then(response => response.json())
-            .then(({ drinks }) => drinks || []);
+    const loadNewCocktails = async (params = { random: true }) => {
+        const { random, refresh } = params;
 
-        setCocktailsList(drinksList);
-    };
+        if (refresh) {
+            setCocktailsList([]);
+        }
 
-    const loadDrinksByAlcohol = async (alcohol) => {
-        const drinksList = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${alcohol}`)
-            .then(response => response.json())
-            .then(({ drinks }) => drinks || []);
-
-        setCocktailsList(drinksList);
-    };
-
-    const loadNewCocktails = (params = {}) => {
-        const { name, alcohol, refresh } = params;
-
-        if (!name && !alcohol) {
-            if (refresh) {
-                setCocktailsList([]);
-            }
-
-            for (let i = 1; i <= 8; i++) {
-                loadRandomDrink();
-            }
+        if (random) {
+            new Array(8).fill(null).forEach(() => addRandomDrink());
             return;
         }
 
-        if (name) {
-            loadDrinksByNameQuery(name);
-            return;
-        }
+        const drinksList = await getFilteredDrinks(params);
 
-        if (alcohol) {
-            loadDrinksByAlcohol(alcohol);
-        }
+        setCocktailsList(drinksList);
     };
 
     return [cocktailsList, loadNewCocktails];
