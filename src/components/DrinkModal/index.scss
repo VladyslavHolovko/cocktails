@@ -51,8 +51,12 @@
     height: 88%;
   }
 
-  &__ingredients {
+  &__ingredients-container {
     min-width: 300px;
+  }
+
+  &__ingredients-item {
+    margin: 8px 0;
   }
 
   &__drink-name {

@@ -30,13 +30,17 @@ const DrinkModal = ({ drink, onClose }) => {
                     <img src={image} alt={name} className="modal__img"/>
                 </div>
                 <div className="modal__description">
-                    <div className="modal__ingredients">
-                        <h2 className="modal__drink-name">
-                            {name}
-                        </h2>
-                        <ul>
+                    <h2 className="modal__drink-name">
+                        {name}
+                    </h2>
+                    <div className="modal__ingredients-container">
+                        <ul className="modal__ingredients-list">
                             {ingredients?.map(([name, measure]) => (
-                                <li key={name}><b>{name}</b>: {measure}</li>
+                                <li key={name}>
+                                    <p className="modal__ingredients-item">
+                                        <b>{name}</b>{measure && ':'} {measure}
+                                    </p>
+                                </li>
                             ))}
                         </ul>
                     </div>
