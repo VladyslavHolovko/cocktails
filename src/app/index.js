@@ -8,6 +8,7 @@ import Filters from "../components/Filters";
 import useCocktailsList from "../hooks/useCocktailsList";
 import observe from "../utils/observe";
 import usePersistedState from "../hooks/usePersistedState";
+import CocktailsList from "../components/CocktailsList";
 
 const CocktailsApp = () => {
     const [cocktailsList, setCocktailsList] = useCocktailsList();
@@ -27,16 +28,16 @@ const CocktailsApp = () => {
 
     return (
         <div className="cocktails cocktails__container">
+            <DrinkModal
+                drink={modalData}
+                onClose={() => setModalData(false)}
+            />
             <div className="cocktails__logo-container">
                 <LocalBarIcon
                     className="cocktails__logo"
                     fontSize="small"
                 />
             </div>
-            <DrinkModal
-                drink={modalData}
-                onClose={() => setModalData(false)}
-            />
             <div className="cocktails__filters">
                 <Filters
                     onSearch={setFilterParam}

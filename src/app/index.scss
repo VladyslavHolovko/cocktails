@@ -25,28 +25,12 @@
     margin: 0 0 2.4rem;
   }
 
-  &__list {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
-    grid-gap: 2.4rem 1rem;
-
-    & > div {
-      min-height: 200px;
-    }
-  }
-
   &__loader {
     position: absolute;
     bottom: 0;
     width: max-content;
     display: flex;
     justify-content: center;
-  }
-
-  &__nothing {
-    animation: 2s ease reveal;
-    margin: 0;
   }
 }
 
