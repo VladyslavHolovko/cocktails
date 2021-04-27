@@ -1,7 +1,6 @@
 import './index.scss';
 import React, { useEffect, useRef, useState } from "react";
 import LocalBarIcon from '@material-ui/icons/LocalBar';
-import Drink from "../components/Drink";
 import DrinkModal from "../components/DrinkModal";
 import Loader from "../components/Loader";
 import Filters from "../components/Filters";
@@ -14,12 +13,12 @@ const CocktailsApp = () => {
     const [cocktailsList, setCocktailsList] = useCocktailsList();
     const [modalData, setModalData] = useState(false);
     const [isLazyLoading, setIsLazyLoading] = useState(true);
-    const [filterParam, setFilterParam] = usePersistedState('filterParam', {refresh: true})
+    const [filterParam, setFilterParam] = usePersistedState('filterParam', { refresh: true })
 
     useEffect(() => {
         setIsLazyLoading(filterParam.refresh);
         setCocktailsList(filterParam);
-    },[filterParam]);
+    }, [filterParam]);
 
     const loader = useRef(null);
     useEffect(() => {
@@ -45,18 +44,10 @@ const CocktailsApp = () => {
                     isFiltered={!isLazyLoading}
                 />
             </div>
-            <div className="cocktails__list">
-                {!cocktailsList.length && (
-                    <p className="cocktails__nothing">Nothing was found...</p>
-                )}
-                {cocktailsList.map(drink => (
-                    <Drink
-                        key={drink.id}
-                        drink={drink}
-                        onDrinkClick={() => setModalData(drink)}
-                    />
-                ))}
-            </div>
+            <CocktailsList
+                cocktailsList={cocktailsList}
+                onDrinkClick={setModalData}
+            />
             <div
                 className="cocktails__loader"
                 ref={loader}

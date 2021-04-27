@@ -2,7 +2,7 @@ import './index.scss';
 import React from 'react';
 
 const Drink = ({ drink, onDrinkClick }) => {
-    const { idDrink, strDrinkThumb, strDrink } = drink;
+    const { id, image, name } = drink;
 
     return (
         <div
@@ -10,7 +10,11 @@ const Drink = ({ drink, onDrinkClick }) => {
             className="drink__container"
             onClick={onDrinkClick}
         >
-            <img src={strDrinkThumb} alt={strDrink} className="drink__img"/>
+            <img
+                src={image}
+                alt={name}
+                className="drink__img"
+            />
             <div className="drink__hover-container">
                 <div className="drink__hover-name">
                     {name}

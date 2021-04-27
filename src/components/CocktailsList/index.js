@@ -1,11 +1,10 @@
 import './index.scss';
 import React from 'react';
 import Drink from "../Drink";
-import Masonry from "react-responsive-masonry";
 
 const CocktailsList = ({ cocktailsList, onDrinkClick }) => {
     return (
-        <Masonry className="cocktails-list" gutter="1rem">
+        <div className="cocktails-list">
             {cocktailsList.length ?
                 cocktailsList.map(drink => (
                     <Drink
@@ -17,7 +16,7 @@ const CocktailsList = ({ cocktailsList, onDrinkClick }) => {
                 :
                 <p className="cocktails-list__empty">Nothing was found...</p>
             }
-        </Masonry>
+        </div>
     );
 };
 

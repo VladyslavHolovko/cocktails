@@ -24,17 +24,6 @@
     filter: grayscale(50%);
   }
 
-  &__category {
-    margin-top: 4px;
-    float: right;
-    font-style: italic;
-    font-size: small;
-  }
-
-  &__ingredients-container {
-    font-size: small;
-  }
-
   &__hover-container {
     position: absolute;
     display: flex;
